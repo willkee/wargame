@@ -1,0 +1,26 @@
+{
+	"development": {
+		"username": "wg_user",
+		"password": "password",
+		"database": "wg_development",
+		"host": "127.0.0.1",
+		"dialect": "postgres",
+		"seederStorage": "sequelize"
+	},
+	"test": {
+		"username": "wg_user",
+		"password": "password",
+		"database": "wg_test",
+		"host": "127.0.0.1",
+		"dialect": "postgres",
+		"seederStorage": "sequelize"
+	},
+	"production": {
+		"username": "wg_user",
+		"password": "password",
+		"database": "wg_production",
+		"host": "127.0.0.1",
+		"dialect": "postgres",
+		"seederStorage": "sequelize"
+	}
+}
