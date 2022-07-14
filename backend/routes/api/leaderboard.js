@@ -1,7 +1,7 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 
-const { Leaderboard } = require("../../models");
+const { Leaderboard } = require("../../db/models");
 
 const router = express.Router();
 

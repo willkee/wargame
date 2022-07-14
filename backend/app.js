@@ -7,7 +7,7 @@ const { ValidationError } = require("sequelize");
 
 const routes = require("./routes");
 
-const environment = process.env.NODE_ENV || "development";
+const { environment } = require("./config");
 
 const app = express();
 app.use(morgan("dev"));

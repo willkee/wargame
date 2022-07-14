@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-const port = 5000;
+const { port } = require("../config");
 
 const app = require("../app");
-const db = require("../models");
+const db = require("../db/models");
 
 db.sequelize
 	.authenticate()
