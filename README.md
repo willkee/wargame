@@ -96,3 +96,7 @@ npx dotenv sequelize db:seed:all
 - This will make it so a player will exclusively be playing against the computer. Since there's no strategy involved (entirely luck based on the shuffle), the game logic will remain the same.
 
 - Further styling changes to make the playing cards look like real playing cards.
+
+## Gameplay
+
+<img src="./frontend/public/war_game_gif.gif" style="width:800px;" />
