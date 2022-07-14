@@ -55,61 +55,56 @@ const GameBoard = ({ deck, p1, p2 }) => {
 		return;
 	};
 
-	const warBattle = (spoilsOfWar) => {
+	const warBattle = async (spoilsOfWar) => {
 		while (true) {
-			let card1 = p1Deck[0];
-			let card2 = p2Deck[0];
-			let card1Val = values[card1[0]];
-			let card2Val = values[card2[0]];
-			console.log(card1Val, card2Val, "stage 1 war");
-			spoilsOfWar.push(card1, card2);
-			setP1Deck((prev) => prev.slice(1));
-			setP2Deck((prev) => prev.slice(1));
-
-			if (card1Val === card2Val) {
-				console.log("vals equal");
-				if (p1Deck.length < 2) {
-					setP2Deck((prev) => [...prev, ...p1Deck]);
-					break;
-				} else if (p2Deck.length < 2) {
-					setP1Deck((prev) => [...prev, ...p2Deck]);
-					break;
-				} else {
-					// Face Down card:
-					spoilsOfWar.push(p1Deck[0], p2Deck[0]);
-					setP1Deck((prev) => prev.slice(1));
-					setP2Deck((prev) => prev.slice(1));
-
-					let card1Val = values[card1[0]];
-					let card2Val = values[card2[0]];
-					setP1Current(p1Deck[0]);
-					setP2Current(p2Deck[0]);
-					console.log(card1Val, card2Val, "stage 2 war");
-
-					if (card1Val > card2Val) {
-						setP1Deck((prev) => [...prev, ...spoilsOfWar]);
-						break;
-					} else if (card2Val > card1Val) {
-						setP2Deck((prev) => [...prev, ...spoilsOfWar]);
-						break;
-					} else {
-						continue;
-					}
-				}
-			} else {
-				if (card1Val > card2Val) {
-					console.log(spoilsOfWar, "spoils");
-					setP1Deck((prev) => [...prev, ...spoilsOfWar]);
-					console.log(p1Deck, "p1");
-				} else if (card2Val > card1Val) {
-					console.log(spoilsOfWar, "spoils");
-					setP2Deck((prev) => [...prev, ...spoilsOfWar]);
-					console.log(p2Deck, "p2");
-				}
-				setP1Current([]);
-				setP2Current([]);
+			// If either player doesn't have enough cards for war, other player wins.
+			if (p1Deck.length < 2) {
+				setP2Deck((prev) => [...prev, ...p1Deck]);
+				setP1Deck([]);
+				break;
+			} else if (p2Deck.length < 2) {
+				setP1Deck((prev) => [...prev, ...p2Deck]);
+				setP2Deck([]);
 				break;
 			}
+
+			// Face down cards
+			let card1_hidden = p1Deck[0];
+			let card2_hidden = p2Deck[0];
+			// Face up cards
+			let card1_shown = p1Deck[1];
+			let card2_shown = p2Deck[1];
+			// Compare values of face up cards
+			let card1Val = values[card1_shown[0]];
+			let card2Val = values[card2_shown[0]];
+
+			// Add face down and face up cards to spoils of war.
+			spoilsOfWar.push(
+				card1_hidden,
+				card2_hidden,
+				card1_shown,
+				card2_shown
+			);
+
+			setP1Deck((prev) => prev.slice(2));
+			setP2Deck((prev) => prev.slice(2));
+
+			if (card1Val > card2Val) {
+				console.log(spoilsOfWar, "spoils");
+				setP1Deck((prev) => [...prev, ...spoilsOfWar]);
+				console.log(p1Deck, "p1");
+			} else if (card2Val > card1Val) {
+				console.log(spoilsOfWar, "spoils");
+				setP2Deck((prev) => [...prev, ...spoilsOfWar]);
+				console.log(p2Deck, "p2");
+			} else {
+				setP1Current([card1_shown]);
+				setP2Current([card2_shown]);
+				continue;
+			}
+			setP1Current([]);
+			setP2Current([]);
+			break;
 		}
 	};
 
