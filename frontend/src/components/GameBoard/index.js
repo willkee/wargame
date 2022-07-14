@@ -17,7 +17,8 @@ const GameBoard = ({ deck, p1, p2 }) => {
 
 	useEffect(() => {
 		setP1Deck(deck.slice(0, deck.length / 2));
-		setP2Deck(deck.slice(deck.length / 2));
+		// setP2Deck(deck.slice(deck.length / 2));
+		setP2Deck(deck.slice(deck.length - 2));
 		setLoaded(true);
 	}, [deck]);
 
@@ -181,12 +182,19 @@ const GameBoard = ({ deck, p1, p2 }) => {
 						</div>
 					) : (
 						<div className={styles.game_over}>
-							<h2>Game Over. Player 2 Wins!</h2>
 							{p1Deck.length === 0 && (
-								<h3>Congratulations {p2}!</h3>
+								<>
+									<h2>Game Over. Player 2 Wins!</h2>
+
+									<h3>Congratulations {p2}!</h3>
+								</>
 							)}
 							{p2Deck.length === 0 && (
-								<h3>Congratulations {p1}!</h3>
+								<>
+									<h2>Game Over. Player 1 Wins!</h2>
+
+									<h3>Congratulations {p1}!</h3>
+								</>
 							)}
 							<div className={styles.button_container}>
 								{!scoreSubmitted ? (
