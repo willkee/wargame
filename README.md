@@ -1,5 +1,13 @@
 # War (card game)
 
+## Table of Contents
+
+-   [Description](https://github.com/willkee/wargame#description)
+-   [Link to Live Site](https://github.com/willkee/wargame#link-to-live-site)
+-   [Getting Started](https://github.com/willkee/wargame#getting-started)
+
+<br>
+
 ## Description
 
 War is a simple card game where the goal is to accumulate all of the cards. When one player accumulates all the cards, that player wins and the game is over. The game starts with the 52 card deck shuffled and split evenly between two players. (26 cards each).
@@ -19,6 +27,31 @@ If a player runs out of cards during War (unable to put down enough cards to ful
 This site may take about 20 seconds to load if it has been 'sleeping'.
 
 [War](https://wk-wargame.herokuapp.com/)
+
+---
+
+## Technologies
+
+<p float="left">
+
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sequelize/sequelize-original.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-plain.svg" style="width:75px;" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-plain-wordmark.svg" style="width:75px;" />
+  &nbsp;
+
+</p>
 
 ---
 
