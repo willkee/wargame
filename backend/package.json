@@ -9,12 +9,14 @@
 		"start:production": "node ./bin/www",
 		"sequelize": "sequelize",
 		"sequelize-cli": "sequelize-cli",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "NODE_ENV=test node_modules/mocha/bin/mocha.js"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"assert": "^2.0.0",
+		"chai-http": "^4.3.0",
 		"cors": "^2.8.5",
 		"dotenv": "^16.0.1",
 		"express": "^4.18.1",
@@ -24,11 +26,15 @@
 		"morgan": "^1.10.0",
 		"per-env": "^1.0.2",
 		"pg": "^8.7.3",
+		"pg-pool": "^3.5.1",
 		"sequelize": "^5.22.5",
 		"sequelize-cli": "^5.5.1"
 	},
 	"devDependencies": {
+		"chai": "^4.3.6",
 		"dotenv-cli": "^6.0.0",
-		"nodemon": "^2.0.19"
+		"mocha": "^10.0.0",
+		"nodemon": "^2.0.19",
+		"supertest": "^6.2.4"
 	}
 }

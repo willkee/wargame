@@ -75,6 +75,7 @@ function App() {
 						onClick={startGame}
 						type="button"
 						disabled={gameStarted}
+						id="start_game_button"
 						className={
 							gameStarted
 								? "username_disabled_button"

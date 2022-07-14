@@ -9,10 +9,10 @@ router.get(
 	"/",
 	asyncHandler(async (req, res) => {
 		try {
-			const leaderboard = await Leaderboard.findAll({
+			const lb = await Leaderboard.findAll({
 				order: [["wins", "DESC"]],
 			});
-			return res.json(leaderboard);
+			return res.json(lb);
 		} catch (err) {
 			console.error("Error: ", err);
 		}
