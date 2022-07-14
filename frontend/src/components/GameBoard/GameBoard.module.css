@@ -1,0 +1,59 @@
+.active_container {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	width: 1200px;
+}
+
+.center {
+	display: flex;
+	flex-direction: column;
+}
+.center h4 {
+	color: white;
+}
+
+.center button {
+	height: 50px;
+	width: 100px;
+	margin: 5px;
+}
+
+.current_cards_container {
+	border: 1px solid rgb(244, 244, 244);
+	height: 280px;
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 20px;
+}
+
+.current_cards_container div {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	height: 80%;
+}
+
+.p1_current {
+	border: 1px solid black;
+	width: 110px;
+	background-color: rgb(168, 199, 229);
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	font-size: 40px;
+	border-radius: 8px;
+}
+.p2_current {
+	border: 1px solid black;
+	width: 110px;
+	background-color: rgb(161, 226, 159);
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	font-size: 40px;
+	border-radius: 8px;
+}

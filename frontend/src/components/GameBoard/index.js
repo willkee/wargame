@@ -3,7 +3,7 @@ import { values } from "../../CardDeck";
 import P1Hand from "./PlayerOne";
 import P2Hand from "./PlayerTwo";
 
-import "./GameBoard.css";
+import styles from "./GameBoard.module.css";
 
 const GameBoard = ({ deck, p1, p2 }) => {
 	const [p1Deck, setP1Deck] = useState([]);
@@ -16,9 +16,43 @@ const GameBoard = ({ deck, p1, p2 }) => {
 
 	useEffect(() => {
 		setP1Deck(deck.slice(0, deck.length / 2));
-		setP2Deck(deck.slice(deck.length / 2));
+		// setP2Deck(deck.slice(deck.length / 2));
+		setP2Deck(deck.slice(deck.length - 2));
 		setLoaded(true);
 	}, [deck]);
+
+	const submitWin = async () => {
+		let winner;
+		if (p1Deck.length === 0) {
+			winner = p2;
+		} else if (p2Deck.length === 0) {
+			winner = p1;
+		} else {
+			throw new Error("Game Not Over.");
+		}
+
+		const board = await fetch("/api/leaderboard");
+		const res = await board.json();
+		const nameExists = res.find(({ username }) => username === winner);
+
+		if (nameExists) {
+			await fetch(`/api/leaderboard/${nameExists.id}`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ username: winner }),
+			});
+		} else {
+			await fetch("/api/leaderboard", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ username: winner, wins: 1 }),
+			});
+		}
+	};
 
 	const drawCards = (e) => {
 		e.preventDefault();
@@ -113,30 +147,49 @@ const GameBoard = ({ deck, p1, p2 }) => {
 			{loaded && (
 				<>
 					{p1Deck.length !== 0 && p2Deck.length !== 0 ? (
-						<>
+						<div className={styles.active_container}>
 							<P1Hand name={p1} hand={p1Deck} />
-							<div className="current-cards-container">
-								Current Cards In Play
-								<div>{p1Current}</div>
-								<div>{p2Current}</div>
-								<button
-									onClick={drawCards}
-									disabled={p1Current.length > 0}
-								>
-									Draw Cards
-								</button>
-								<button
-									onClick={determineWin}
-									disabled={p1Current.length === 0}
-								>
-									Continue
-								</button>
+							<div className={styles.current_cards_container}>
+								<div>
+									<div className={styles.p1_current}>
+										<span>{p1Current[0]}</span>
+										<span>{p1Current[1]}</span>
+									</div>
+									<div className={styles.center}>
+										<h4>Current Play</h4>
+										<button
+											onClick={drawCards}
+											disabled={p1Current.length > 0}
+										>
+											Draw Cards
+										</button>
+										<button
+											onClick={determineWin}
+											disabled={p1Current.length === 0}
+										>
+											Continue
+										</button>
+									</div>
+									<div className={styles.p2_current}>
+										<span>{p2Current[0]}</span>
+										<span>{p2Current[1]}</span>
+									</div>
+								</div>
 							</div>
 							<P2Hand name={p2} hand={p2Deck} />
-						</>
+						</div>
 					) : (
 						<>
-							<div>Game Over</div>
+							<div>Game Over. Player 2 Wins!</div>
+							{p1Deck.length === 0 && (
+								<div>Congratulations {p2}!</div>
+							)}
+							{p2Deck.length === 0 && (
+								<div>Congratulations {p1}!</div>
+							)}
+							<button onClick={submitWin}>
+								Submit Win To Leaderboard
+							</button>
 							<button>New Game</button>
 						</>
 					)}
