@@ -12,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 			},
 		},
-		{}
+		{
+			freezeTableName: true,
+		}
 	);
 	Leaderboard.associate = function (models) {};
 	return Leaderboard;

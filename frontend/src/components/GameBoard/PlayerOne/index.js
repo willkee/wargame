@@ -3,7 +3,7 @@ import styles from "./p1.module.css";
 const P1Hand = ({ hand, name }) => {
 	return (
 		<div className={styles.container}>
-			<h3>Player One: {name}</h3>
+			<h3 id="player-one-name">Player One: {name}</h3>
 			<div>Cards remaining: {hand.length}</div>
 			<div className={styles.deck}>
 				{hand.map((card, i) => (
