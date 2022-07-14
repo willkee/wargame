@@ -8,16 +8,12 @@ const router = express.Router();
 router.get(
 	"/",
 	asyncHandler(async (req, res) => {
-		console.log("test1");
 		try {
-			console.log("test2");
 			const lb = await Leaderboard.findAll({
 				order: [["wins", "DESC"]],
 			});
-			console.log("test4");
 			res.json(lb);
 		} catch (err) {
-			console.log("test3");
 			console.error("Error", err);
 		}
 	})
