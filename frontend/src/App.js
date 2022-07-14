@@ -55,7 +55,7 @@ function App() {
 			<Leaderboard />
 			<div>
 				<form className="username-form">
-					<div>
+					<div className="error_container">
 						{errors.length > 0 &&
 							errors.map((err, i) => <div key={i}>{err}</div>)}
 					</div>

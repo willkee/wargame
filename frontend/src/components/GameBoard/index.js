@@ -13,11 +13,11 @@ const GameBoard = ({ deck, p1, p2 }) => {
 	const [p2Current, setP2Current] = useState([]);
 
 	const [loaded, setLoaded] = useState(false);
+	const [scoreSubmitted, setScoreSubmitted] = useState(false);
 
 	useEffect(() => {
 		setP1Deck(deck.slice(0, deck.length / 2));
-		// setP2Deck(deck.slice(deck.length / 2));
-		setP2Deck(deck.slice(deck.length - 2));
+		setP2Deck(deck.slice(deck.length / 2));
 		setLoaded(true);
 	}, [deck]);
 
@@ -52,10 +52,12 @@ const GameBoard = ({ deck, p1, p2 }) => {
 				body: JSON.stringify({ username: winner, wins: 1 }),
 			});
 		}
+		setScoreSubmitted(true);
 	};
 
 	const drawCards = (e) => {
 		e.preventDefault();
+		setScoreSubmitted(false);
 
 		setP1Current(p1Deck[0]);
 		setP2Current(p2Deck[0]);
@@ -179,19 +181,26 @@ const GameBoard = ({ deck, p1, p2 }) => {
 							<P2Hand name={p2} hand={p2Deck} />
 						</div>
 					) : (
-						<>
-							<div>Game Over. Player 2 Wins!</div>
+						<div className={styles.game_over}>
+							<h2>Game Over. Player 2 Wins!</h2>
 							{p1Deck.length === 0 && (
-								<div>Congratulations {p2}!</div>
+								<h3>Congratulations {p2}!</h3>
 							)}
 							{p2Deck.length === 0 && (
-								<div>Congratulations {p1}!</div>
+								<h3>Congratulations {p1}!</h3>
 							)}
-							<button onClick={submitWin}>
-								Submit Win To Leaderboard
-							</button>
-							<button>New Game</button>
-						</>
+							<div className={styles.button_container}>
+								{!scoreSubmitted ? (
+									<button onClick={submitWin}>
+										Submit Win To Leaderboard
+									</button>
+								) : (
+									<h4 className={styles.submitted}>
+										Submitted to Leaderboard!
+									</h4>
+								)}
+							</div>
+						</div>
 					)}
 				</>
 			)}

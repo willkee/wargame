@@ -3,7 +3,7 @@ import styles from "./p2.module.css";
 const P2Hand = ({ hand, name }) => {
 	return (
 		<div className={styles.container}>
-			<div>Player Two: {name}</div>
+			<h3>Player Two: {name}</h3>
 			<div>Cards remaining: {hand.length}</div>
 
 			<div className={styles.deck}>
