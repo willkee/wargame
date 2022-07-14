@@ -69,9 +69,6 @@ const GameBoard = ({ deck, p1, p2 }) => {
 		const p1CardValue = values[p1Current[0]];
 		const p2CardValue = values[p2Current[0]];
 
-		console.log(p1Current, p2Current);
-		console.log(p1CardValue, p2CardValue, "CARD VALUES");
-
 		if (p1CardValue > p2CardValue) {
 			setP1Deck((prev) => [...prev, p1Current, p2Current]);
 			setP1Current([]);
@@ -83,10 +80,6 @@ const GameBoard = ({ deck, p1, p2 }) => {
 		} else {
 			const spoilsOfWar = [p1Current, p2Current];
 			warBattle(spoilsOfWar);
-			// setP1Deck((prev) => [...prev, p1Current]);
-			// setP2Deck((prev) => [...prev, p2Current]);
-			// setP1Current([]);
-			// setP2Current([]);
 		}
 		return;
 	};
@@ -126,13 +119,9 @@ const GameBoard = ({ deck, p1, p2 }) => {
 			setP2Deck((prev) => prev.slice(2));
 
 			if (card1Val > card2Val) {
-				console.log(spoilsOfWar, "spoils");
 				setP1Deck((prev) => [...prev, ...spoilsOfWar]);
-				console.log(p1Deck, "p1");
 			} else if (card2Val > card1Val) {
-				console.log(spoilsOfWar, "spoils");
 				setP2Deck((prev) => [...prev, ...spoilsOfWar]);
-				console.log(p2Deck, "p2");
 			} else {
 				setP1Current([card1_shown]);
 				setP2Current([card2_shown]);

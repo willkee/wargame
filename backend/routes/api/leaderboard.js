@@ -45,14 +45,6 @@ router.put(
 		const entry = await Leaderboard.findByPk(id);
 		const newWins = entry.wins + 1;
 
-		console.log(
-			req.body,
-			req.body.username,
-			entry.username,
-			newWins,
-			"PUT REQUEST"
-		);
-
 		try {
 			if (entry) {
 				if (req.body.username === entry.username) {
@@ -65,7 +57,6 @@ router.put(
 					);
 
 					const updatedEntry = await Leaderboard.findByPk(id);
-					console.log(updatedEntry, "ENTRY");
 					return res.json(updatedEntry);
 				}
 			}
