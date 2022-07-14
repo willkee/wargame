@@ -12,9 +12,9 @@ router.get(
 			const lb = await Leaderboard.findAll({
 				order: [["wins", "DESC"]],
 			});
-			res.json(lb);
+			return res.json(lb);
 		} catch (err) {
-			console.error("Error", err);
+			console.error("Error: ", err);
 		}
 	})
 );
