@@ -17,8 +17,7 @@ const GameBoard = ({ deck, p1, p2 }) => {
 
 	useEffect(() => {
 		setP1Deck(deck.slice(0, deck.length / 2));
-		// setP2Deck(deck.slice(deck.length / 2));
-		setP2Deck(deck.slice(deck.length - 2));
+		setP2Deck(deck.slice(deck.length / 2));
 		setLoaded(true);
 	}, [deck]);
 
