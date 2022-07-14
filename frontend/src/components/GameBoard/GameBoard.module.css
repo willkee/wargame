@@ -20,8 +20,19 @@
 	margin: 5px;
 	border: 1px solid black;
 	border-radius: 5px;
+	transition: all linear 0.2s;
+}
+.enabled_button {
 	background-color: rgb(247, 195, 131);
 	cursor: pointer;
+}
+
+.enabled_button:hover {
+	background-color: rgb(229, 164, 85);
+}
+
+.disabled_button {
+	background-color: grey;
 }
 
 .current_cards_container {

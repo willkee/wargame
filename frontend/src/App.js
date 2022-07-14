@@ -75,10 +75,27 @@ function App() {
 						onClick={startGame}
 						type="button"
 						disabled={gameStarted}
+						className={
+							gameStarted
+								? "username_disabled_button"
+								: "username_enabled_button"
+						}
 					>
 						Start Game
 					</button>
-					<button type="button" onClick={() => setGameStarted(false)}>
+					<button
+						type="button"
+						className={
+							!gameStarted
+								? "username_disabled_button"
+								: "username_enabled_button"
+						}
+						onClick={() => {
+							setPlayerOne("");
+							setPlayerTwo("");
+							setGameStarted(false);
+						}}
+					>
 						Reset Game
 					</button>
 				</form>
@@ -87,7 +104,8 @@ function App() {
 				<GameBoard deck={currentDeck} p1={playerOne} p2={playerTwo} />
 			) : (
 				<div className="game_not_started">
-					Enter both usernames to start a new game.
+					<h2>Welcome to the card game of War!</h2>
+					<div>Enter both usernames to start a new game.</div>
 				</div>
 			)}
 		</div>

@@ -162,12 +162,22 @@ const GameBoard = ({ deck, p1, p2 }) => {
 										<button
 											onClick={drawCards}
 											disabled={p1Current.length > 0}
+											className={
+												p1Current.length > 0
+													? styles.disabled_button
+													: styles.enabled_button
+											}
 										>
 											Draw Cards
 										</button>
 										<button
 											onClick={determineWin}
 											disabled={p1Current.length === 0}
+											className={
+												p1Current.length === 0
+													? styles.disabled_button
+													: styles.enabled_button
+											}
 										>
 											Continue
 										</button>
