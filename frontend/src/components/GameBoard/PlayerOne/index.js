@@ -1,15 +1,18 @@
-import styles from "./p1.css";
+import styles from "./p1.module.css";
 
-const P1Hand = ({ hand }) => {
-	console.log(hand);
+const P1Hand = ({ hand, name }) => {
 	return (
-		<div style={{ display: "flex" }}>
-			{hand.map((card, i) => (
-				<div style={{ display: "flex" }} key={i}>
-					<div>{card[0]}</div>
-					<div>{card[1]}</div>
-				</div>
-			))}
+		<div className={styles.container}>
+			<div>Player One: {name}</div>
+			<div>Cards remaining: {hand.length}</div>
+			<div className={styles.deck}>
+				{hand.map((card, i) => (
+					<div className={styles.hand} key={i}>
+						<div>{card[0]}</div>
+						<div>{card[1]}</div>
+					</div>
+				))}
+			</div>
 		</div>
 	);
 };

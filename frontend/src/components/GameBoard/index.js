@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import { shuffleDeck, deck, values } from "../../CardDeck";
+import { values } from "../../CardDeck";
 import P1Hand from "./PlayerOne";
 import P2Hand from "./PlayerTwo";
 
-const GameBoard = ({ deck }) => {
-	const [gameOver, setGameOver] = useState(false);
-	const [currentDeck, setCurrentDeck] = useState(deck);
+import "./GameBoard.css";
 
+const GameBoard = ({ deck, p1, p2 }) => {
 	const [p1Deck, setP1Deck] = useState([]);
 	const [p2Deck, setP2Deck] = useState([]);
-	const [loaded, setLoaded] = useState(false);
 
-	const [p1Win, setP1Win] = useState(false);
-	const [p2Win, setP2Win] = useState(false);
+	const [p1Current, setP1Current] = useState([]);
+	const [p2Current, setP2Current] = useState([]);
+
+	const [loaded, setLoaded] = useState(false);
 
 	useEffect(() => {
 		setP1Deck(deck.slice(0, deck.length / 2));
@@ -20,96 +20,133 @@ const GameBoard = ({ deck }) => {
 		setLoaded(true);
 	}, [deck]);
 
-	// const shuffle = () => {
-	// 	setCurrentDeck((prev) => {
-	// 		shuffleDeck(prev);
-	// 		setGameOver(false);
-	// 		return [...prev];
-	// 	});
-	// };
-
-	const makePlay = async (e) => {
+	const drawCards = (e) => {
 		e.preventDefault();
 
-		// pop last value from each deck and compare
-		const [p1Card, p2Card] = await removeCard();
+		setP1Current(p1Deck[0]);
+		setP2Current(p2Deck[0]);
+		setP1Deck((prev) => prev.slice(1));
+		setP2Deck((prev) => prev.slice(1));
+	};
 
-		if (!p1Card) return setP2Win(true);
-		if (!p2Card) return setP1Win(true);
+	const determineWin = () => {
+		const p1CardValue = values[p1Current[0]];
+		const p2CardValue = values[p2Current[0]];
 
-		const p1CardValue = values[p1Card[0]];
-		const p2CardValue = values[p2Card[0]];
+		console.log(p1Current, p2Current);
+		console.log(p1CardValue, p2CardValue, "CARD VALUES");
 
 		if (p1CardValue > p2CardValue) {
-			await setP1Deck((prev) => [...prev, p1Card, p2Card]);
+			setP1Deck((prev) => [...prev, p1Current, p2Current]);
+			setP1Current([]);
+			setP2Current([]);
 		} else if (p1CardValue < p2CardValue) {
-			await setP2Deck((prev) => [...prev, p2Card, p1Card]);
+			setP2Deck((prev) => [...prev, p1Current, p2Current]);
+			setP1Current([]);
+			setP2Current([]);
 		} else {
-			const winningPlay = [];
-			goToWar(p1Card, p2Card, winningPlay);
+			const spoilsOfWar = [p1Current, p2Current];
+			warBattle(spoilsOfWar);
+			// setP1Deck((prev) => [...prev, p1Current]);
+			// setP2Deck((prev) => [...prev, p2Current]);
+			// setP1Current([]);
+			// setP2Current([]);
+		}
+		return;
+	};
 
-			if (p1Win || p2Win) return setGameOver(true);
+	const warBattle = (spoilsOfWar) => {
+		while (true) {
+			let card1 = p1Deck[0];
+			let card2 = p2Deck[0];
+			let card1Val = values[card1[0]];
+			let card2Val = values[card2[0]];
+			console.log(card1Val, card2Val, "stage 1 war");
+			spoilsOfWar.push(card1, card2);
+			setP1Deck((prev) => prev.slice(1));
+			setP2Deck((prev) => prev.slice(1));
+
+			if (card1Val === card2Val) {
+				console.log("vals equal");
+				if (p1Deck.length < 2) {
+					setP2Deck((prev) => [...prev, ...p1Deck]);
+					break;
+				} else if (p2Deck.length < 2) {
+					setP1Deck((prev) => [...prev, ...p2Deck]);
+					break;
+				} else {
+					// Face Down card:
+					spoilsOfWar.push(p1Deck[0], p2Deck[0]);
+					setP1Deck((prev) => prev.slice(1));
+					setP2Deck((prev) => prev.slice(1));
+
+					let card1Val = values[card1[0]];
+					let card2Val = values[card2[0]];
+					setP1Current(p1Deck[0]);
+					setP2Current(p2Deck[0]);
+					console.log(card1Val, card2Val, "stage 2 war");
+
+					if (card1Val > card2Val) {
+						setP1Deck((prev) => [...prev, ...spoilsOfWar]);
+						break;
+					} else if (card2Val > card1Val) {
+						setP2Deck((prev) => [...prev, ...spoilsOfWar]);
+						break;
+					} else {
+						continue;
+					}
+				}
+			} else {
+				if (card1Val > card2Val) {
+					console.log(spoilsOfWar, "spoils");
+					setP1Deck((prev) => [...prev, ...spoilsOfWar]);
+					console.log(p1Deck, "p1");
+				} else if (card2Val > card1Val) {
+					console.log(spoilsOfWar, "spoils");
+					setP2Deck((prev) => [...prev, ...spoilsOfWar]);
+					console.log(p2Deck, "p2");
+				}
+				setP1Current([]);
+				setP2Current([]);
+				break;
+			}
 		}
 	};
 
-	const removeCard = async () => {
-		if (!p1Deck.length) return [false, true];
-		if (!p2Deck.length) return [true, false];
-
-		// Take the first card off the top of the deck.
-		const p1Card = p1Deck[0];
-		const p2Card = p2Deck[0];
-
-		setP1Deck((state) => [...state.slice(1)]);
-		setP2Deck((state) => [...state.slice(1)]);
-
-		return [p1Card, p2Card];
-	};
-
-	const goToWar = async (currentP1Card, currentP2Card, winningPlay) => {
-		winningPlay.push(currentP1Card, currentP2Card);
-
-		const res = await removeCard();
-		console.log(res, "RES from remove card");
-
-		const [p1FaceDown, p2FaceDown] = res;
-
-		// During "War", if one player runs out of cards, the other player wins.
-		if (!p1FaceDown) return setP2Win(true);
-		if (!p2FaceDown) return setP1Win(true);
-
-		// We are adding face down cards to array of current cards in play.
-		winningPlay.push(p1FaceDown, p2FaceDown);
-
-		const [p1FaceUp, p2FaceUp] = removeCard();
-
-		if (p1FaceUp[0] === p2FaceUp[0]) goToWar(p1FaceUp, p2FaceUp);
-
-		console.log(p1FaceUp, "P1", p2FaceUp, "P2");
-	};
 	return (
 		<div>
 			{loaded && (
 				<>
-					<P1Hand hand={p1Deck} />
-					<P2Hand hand={p2Deck} />
-					<button onClick={makePlay}>Play Round</button>
+					{p1Deck.length !== 0 && p2Deck.length !== 0 ? (
+						<>
+							<P1Hand name={p1} hand={p1Deck} />
+							<div className="current-cards-container">
+								Current Cards In Play
+								<div>{p1Current}</div>
+								<div>{p2Current}</div>
+								<button
+									onClick={drawCards}
+									disabled={p1Current.length > 0}
+								>
+									Draw Cards
+								</button>
+								<button
+									onClick={determineWin}
+									disabled={p1Current.length === 0}
+								>
+									Continue
+								</button>
+							</div>
+							<P2Hand name={p2} hand={p2Deck} />
+						</>
+					) : (
+						<>
+							<div>Game Over</div>
+							<button>New Game</button>
+						</>
+					)}
 				</>
 			)}
-			{/* <table>
-				<thead></thead>
-				<tbody>
-					<tr>
-						<td>Number of Cards</td>
-						<td>Current Card</td>
-					</tr>
-					<tr>
-						<td>{deck?.length - 1}</td>
-						<td>{deck && deck[0]}</td>
-					</tr>
-				</tbody>
-			</table>
-			<div>{deck?.slice(1)}</div> */}
 		</div>
 	);
 };
