@@ -16,6 +16,8 @@ If a player runs out of cards during War (unable to put down enough cards to ful
 
 ## Link to Live Site
 
+This site may take about 20 seconds to load if it has been 'sleeping'.
+
 [War](https://wk-wargame.herokuapp.com/)
 
 ---
@@ -85,3 +87,12 @@ npx dotenv sequelize db:seed:all
 
 11. Users may select `Reset Game` to select new usernames (or re-use them!) and play again.
 
+## Future Development Ideas
+
+- One of the first things I would add in a future development would be to make user authentication with log in credentials and cookies. This will protect someone else from accidentally (or intentionally!) incrementing another user's wins. 
+
+- While this will preserve the name of the user currently logged in on browser refresh, the game state will still be lost. (Don't hard refresh during the game!)
+
+- This will make it so a player will exclusively be playing against the computer. Since there's no strategy involved (entirely luck based on the shuffle), the game logic will remain the same.
+
+- Further styling changes to make the playing cards look like real playing cards.
