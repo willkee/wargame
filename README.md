@@ -4,7 +4,10 @@
 
 -   [Description](https://github.com/willkee/wargame#description)
 -   [Link to Live Site](https://github.com/willkee/wargame#link-to-live-site)
+-   [Technologies](https://github.com/willkee/wargame#technologies)
 -   [Getting Started](https://github.com/willkee/wargame#getting-started)
+-   [Gameplay](https://github.com/willkee/wargame#gameplay)
+-   [Future Development Ideas](https://github.com/willkee/wargame#future-development-ideas)
 
 <br>
 
@@ -120,6 +123,14 @@ npx dotenv sequelize db:seed:all
 
 11. Users may select `Reset Game` to select new usernames (or re-use them!) and play again.
 
+<br>
+
+## Gameplay
+
+<img src="./frontend/public/war_game_gif.gif" style="width:800px;" />
+
+<br>
+
 ## Future Development Ideas
 
 - One of the first things I would add in a future development would be to make user authentication with log in credentials and cookies. This will protect someone else from accidentally (or intentionally!) incrementing another user's wins. 
@@ -130,6 +141,3 @@ npx dotenv sequelize db:seed:all
 
 - Further styling changes to make the playing cards look like real playing cards.
 
-## Gameplay
-
-<img src="./frontend/public/war_game_gif.gif" style="width:800px;" />
