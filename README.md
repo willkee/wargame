@@ -6,10 +6,13 @@
 -   [Link to Live Site](https://github.com/willkee/wargame#link-to-live-site)
 -   [Technologies](https://github.com/willkee/wargame#technologies)
 -   [Getting Started](https://github.com/willkee/wargame#getting-started)
+-   [Testing](https://github.com/willkee/wargame#testing)
 -   [Gameplay](https://github.com/willkee/wargame#gameplay)
 -   [Future Development Ideas](https://github.com/willkee/wargame#future-development-ideas)
 
 <br>
+
+---
 
 ## Description
 
@@ -17,11 +20,13 @@ War is a simple card game where the goal is to accumulate all of the cards. When
 
 Each player will draw a card and place it on the table face up. The player with the highest card takes both cards and places them at the bottom of their deck. Suits are ignored. The 2 is the lowest and Ace is the highest.
 
-If they are the same rank, it is War. 
+If they are the same rank, it is War.
 
 When a War occurs, each player places one card face down, and another card face up from their deck. The face up cards are compared to see which has a higher rank. If there is no tie, the player with the higher card takes all of the cards on the table (face up and face down) and places them at the bottom of their deck. If there is another tie, each player places another card face down and another card face up. The face up cards are compared again. This process repeats itself until there is no longer a tie between the face up cards.
 
 If a player runs out of cards during War (unable to put down enough cards to fulfill their side of the war), that player loses and their opponent wins the game.
+
+<br>
 
 ---
 
@@ -62,7 +67,7 @@ This site may take about 20 seconds to load if it has been 'sleeping'.
 
 These installation instructions are assuming you have a version of Node.js installed as well as NPM.
 
-You may install Node from this site: [Node.js](https://nodejs.org/en/download/). 
+You may install Node from this site: [Node.js](https://nodejs.org/en/download/).
 Here are the docs for NPM if you don't have it installed: [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
 <br/>
@@ -117,13 +122,32 @@ npx dotenv sequelize db:seed:all
 
 8. To draw cards, select `Draw Cards`. To continue to the next round, select `Continue`.
 
-9. The game will automatically end and display the winner once one player runs out of cards. 
+9. The game will automatically end and display the winner once one player runs out of cards.
 
 10. There will be an option to submit the winner's username to the Leaderboard upon game completion.
 
 11. Users may select `Reset Game` to select new usernames (or re-use them!) and play again.
 
 <br>
+
+---
+
+## Testing
+
+-   To run backend tests:
+
+    -   Navigate to the backend folder and run `npm test`.
+
+<br>
+
+-   To run frontend tests:
+    -   Navigate to the frontend folder and run `npm test`.
+    -   Press `a` when prompted to run all tests.
+    -   Press `q` to exit testing.
+
+<br>
+
+---
 
 ## Gameplay
 
@@ -133,11 +157,12 @@ npx dotenv sequelize db:seed:all
 
 ## Future Development Ideas
 
-- One of the first things I would add in a future development would be to make user authentication with log in credentials and cookies. This will protect someone else from accidentally (or intentionally!) incrementing another user's wins. 
+-   One of the first things I would add in a future development would be to make user authentication with log in credentials and cookies. This will protect someone else from accidentally (or intentionally!) incrementing another user's wins.
 
-- While this will preserve the name of the user currently logged in on browser refresh, the game state will still be lost. (Don't hard refresh during the game!)
+-   While this will preserve the name of the user currently logged in on browser refresh, the game state will still be lost. (Don't hard refresh during the game!)
 
-- This will make it so a player will exclusively be playing against the computer. Since there's no strategy involved (entirely luck based on the shuffle), the game logic will remain the same.
+-   This will make it so a player will exclusively be playing against the computer. Since there's no strategy involved (entirely luck based on the shuffle), the game logic will remain the same.
 
-- Further styling changes to make the playing cards look like real playing cards.
+-   Further styling changes to make the playing cards look like real playing cards.
 
+-   Setting up a Redux store to keep track of the leaderboard data.
