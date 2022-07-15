@@ -9,7 +9,8 @@
 		"start:production": "node ./bin/www",
 		"sequelize": "sequelize",
 		"sequelize-cli": "sequelize-cli",
-		"test": "NODE_ENV=test node_modules/mocha/bin/mocha.js --exit"
+		"test": "npm run test-build && NODE_ENV=test node_modules/mocha/bin/mocha.js --exit && NODE_ENV=test npx dotenv sequelize db:drop",
+		"test-build": "NODE_ENV=test npx dotenv sequelize db:create && NODE_ENV=test npx dotenv sequelize db:migrate && NODE_ENV=test npx dotenv sequelize db:seed:all"
 	},
 	"keywords": [],
 	"author": "",
