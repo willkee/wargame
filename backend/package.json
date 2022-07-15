@@ -9,7 +9,7 @@
 		"start:production": "node ./bin/www",
 		"sequelize": "sequelize",
 		"sequelize-cli": "sequelize-cli",
-		"test": "NODE_ENV=test node_modules/mocha/bin/mocha.js"
+		"test": "NODE_ENV=test node_modules/mocha/bin/mocha.js --exit"
 	},
 	"keywords": [],
 	"author": "",

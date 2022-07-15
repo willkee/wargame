@@ -3,7 +3,7 @@
 module.exports = {
 	up: (queryInterface, Sequelize) => {
 		return queryInterface.bulkInsert(
-			"Leaderboards",
+			"Leaderboard",
 			[
 				{
 					username: "demo",
@@ -19,6 +19,6 @@ module.exports = {
 	},
 
 	down: (queryInterface, Sequelize) => {
-		return queryInterface.bulkDelete("Leaderboards", null, {});
+		return queryInterface.bulkDelete("Leaderboard", null, {});
 	},
 };

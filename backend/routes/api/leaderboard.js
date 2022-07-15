@@ -12,6 +12,7 @@ router.get(
 			const lb = await Leaderboard.findAll({
 				order: [["wins", "DESC"]],
 			});
+
 			return res.json(lb);
 		} catch (err) {
 			console.error("Error: ", err);
@@ -66,4 +67,36 @@ router.put(
 	})
 );
 
+// FOR API TESTING:
+
+router.get(
+	"/:id",
+	asyncHandler(async (req, res) => {
+		const id = parseInt(req.params.id, 10);
+		const entry = await Leaderboard.findByPk(id);
+
+		if (entry) {
+			return res.json(entry);
+		} else {
+			throw new Error("Entry Not Found.");
+		}
+	})
+);
+
+router.delete(
+	"/:id",
+	asyncHandler(async (req, res) => {
+		const id = parseInt(req.params.id, 10);
+		const entry = await Leaderboard.findByPk(id);
+
+		try {
+			if (entry) {
+				await Leaderboard.destroy({ where: { id } });
+				return res.json({ id });
+			}
+		} catch (err) {
+			console.error("Error: ", err);
+		}
+	})
+);
 module.exports = router;
