@@ -4,9 +4,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 
 const { ValidationError } = require("sequelize");
-
 const routes = require("./routes");
-
 const { environment } = require("./config");
 
 const app = express();
@@ -24,7 +22,6 @@ app.use(
 app.use(routes);
 
 // Error Handling
-
 app.use((_req, _res, next) => {
 	const err = new Error("The requested resource is not found.");
 	err.title = "Resource Not Found.";

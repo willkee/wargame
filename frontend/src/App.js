@@ -24,6 +24,8 @@ function App() {
 		e.preventDefault();
 		setErrors([]);
 
+		// Ensure valid usernames are entered.
+
 		if (!playerOne || !playerTwo) {
 			return setErrors(["Please enter both player names."]);
 		}

@@ -17,6 +17,7 @@ export const ModalProvider = (props) => {
 	useEffect(() => {
 		setValue(modalRef.current);
 	}, []);
+
 	return (
 		<>
 			<ModalContext.Provider value={value}>
